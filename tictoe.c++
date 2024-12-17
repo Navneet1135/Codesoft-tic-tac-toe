@@ -3,8 +3,6 @@
 #include <string>
 
 using namespace std;
-
-// Function to display the game board
 void displayBoard(const vector<vector<char>> &board) {
     cout << "\n";
     for (const auto &row : board) {
@@ -16,16 +14,14 @@ void displayBoard(const vector<vector<char>> &board) {
     cout << "\n";
 }
 
-// Function to check if a player has won
 bool checkWin(const vector<vector<char>> &board, char player) {
-    // Check rows and columns
     for (int i = 0; i < 3; ++i) {
         if ((board[i][0] == player && board[i][1] == player && board[i][2] == player) ||
             (board[0][i] == player && board[1][i] == player && board[2][i] == player)) {
             return true;
         }
     }
-    // Check diagonals
+
     if ((board[0][0] == player && board[1][1] == player && board[2][2] == player) ||
         (board[0][2] == player && board[1][1] == player && board[2][0] == player)) {
         return true;
@@ -33,7 +29,7 @@ bool checkWin(const vector<vector<char>> &board, char player) {
     return false;
 }
 
-// Function to check if the game is a draw
+
 bool checkDraw(const vector<vector<char>> &board) {
     for (const auto &row : board) {
         for (const auto &cell : row) {
@@ -48,7 +44,6 @@ bool checkDraw(const vector<vector<char>> &board) {
 int main() {
     char playAgain = 'y';
     while (playAgain == 'y' || playAgain == 'Y') {
-        // Initialize the game board
         vector<vector<char>> board(3, vector<char>(3, '-'));
         char currentPlayer = 'X';
         bool gameWon = false;
@@ -60,8 +55,7 @@ int main() {
             int row, col;
             cout << "Player " << currentPlayer << ", enter your move (row and column: 0 1 2): ";
             cin >> row >> col;
-
-            // Validate input
+            
             if (row < 0 || row >= 3 || col < 0 || col >= 3 || board[row][col] != '-') {
                 cout << "Invalid move. Try again.\n";
                 continue;
@@ -71,7 +65,6 @@ int main() {
             board[row][col] = currentPlayer;
             displayBoard(board);
 
-            // Check for win or draw
             if (checkWin(board, currentPlayer)) {
                 cout << "Player " << currentPlayer << " wins!\n";
                 gameWon = true;
@@ -82,8 +75,7 @@ int main() {
                 cout << "It's a draw!\n";
                 break;
             }
-
-            // Switch players
+       //switching player
             currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
         }
 
